@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANSHU KUMAR - Premium Design Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #050508;
+            --text-white: #ffffff;
+            --purple: #9b5cff;
+            --blue: #4d7cff;
+            --cyan: #00d4ff;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 64px;
+            --spacing-xl: 96px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0a0a0f 50%, var(--bg-dark) 100%);
+            color: var(--text-white);
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        /* Animated background glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(155, 92, 255, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+            animation: float-reverse 25s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        @keyframes float-reverse {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, -30px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(155, 92, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(155, 92, 255, 0.6); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Header */
+        header {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            border-bottom: 1px solid;
+            border-image: linear-gradient(90deg, transparent, var(--purple) 50%, transparent) 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .header-logo {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--text-white) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-shape {
+            margin-bottom: var(--spacing-lg);
+            font-size: 80px;
+            filter: drop-shadow(0 0 30px rgba(155, 92, 255, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-title {
+            font-size: clamp(36px, 8vw, 72px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1px;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 50%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            margin-top: var(--spacing-lg);
+            padding: 16px 48px;
+            background: rgba(155, 92, 255, 0.1);
+            border: 1px solid rgba(155, 92, 255, 0.5);
+            border-radius: 50px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+            z-index: -1;
+            transition: left 0.4s ease;
+        }
+
+        .hero-cta:hover {
+            box-shadow: 0 0 30px rgba(155, 92, 255, 0.6), 0 0 60px rgba(77, 124, 255, 0.3);
+            border-color: rgba(155, 92, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta:hover::before {
+            left: 0;
+        }
+
+        .hero-cta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover .arrow-icon {
+            transform: translateX(4px);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--purple) 30%, var(--purple) 70%, transparent);
+            margin: var(--spacing-xl) 0;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        /* Our Work Section */
+        .work-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .work-intro-title {
+            font-size: clamp(48px, 8vw, 64px);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .work-intro-title .highlight {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .work-intro-desc {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .work-intro-desc p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Work Gallery */
+        .work-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .work-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16 / 10;
+            cursor: pointer;
+            group: 'card';
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .work-card:nth-child(3) {
+            grid-column: 1 / -1;
+            aspect-ratio: 16 / 6;
+        }
+
+        .work-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .work-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(155, 92, 255, 0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .work-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, var(--purple), var(--cyan)) 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 3;
+            pointer-events: none;
+            animation: none;
+        }
+
+        .work-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .work-card:hover::before {
+            opacity: 1;
+        }
+
+        .work-card:hover::after {
+            opacity: 1;
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            margin: var(--spacing-xl) 0;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .reviews-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: var(--spacing-lg);
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .review-card {
+            padding: var(--spacing-lg);
+            background: rgba(155, 92, 255, 0.05);
+            border: 1px solid rgba(155, 92, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(77, 124, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .review-card:hover {
+            border-color: rgba(155, 92, 255, 0.5);
+            box-shadow: 0 0 40px rgba(155, 92, 255, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .review-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .review-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-md);
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--cyan);
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            border-top: 1px solid;
+            border-image: linear-gradient(90deg, transparent, var(--purple) 50%, transparent) 1;
+            margin-top: var(--spacing-xl);
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .footer-content {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .footer-link {
+            color: var(--cyan);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .footer-link:hover {
+            color: var(--purple);
+            background: rgba(155, 92, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            header {
+                padding: var(--spacing-md) 0;
+            }
+
+            .hero {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .work-intro {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .work-intro-title {
+                font-size: 36px;
+            }
+
+            .work-gallery {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-sm);
+            }
+
+            .work-card:nth-child(3) {
+                grid-column: 1;
+                aspect-ratio: 16 / 10;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-shape {
+                font-size: 60px;
+            }
+
+            .hero-cta {
+                font-size: 12px;
+                padding: 14px 32px;
+            }
+
+            footer {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+        }
+
+        /* Intersection Observer for animations */
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--purple), var(--cyan));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--cyan), var(--purple));
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container">
+        <div class="header-logo">✦ ANSHU KUMAR ✦</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container">
+        <div class="hero-shape">🌸✨</div>
+        <h1 class="hero-title">
+            Branding & <span class="highlight">Design</span>
+        </h1>
+        <button class="hero-cta">
+            <span>READ MORE <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg></span>
+        </button>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Our Work Section -->
+    <section class="container">
+        <div class="work-intro">
+            <div>
+                <h2 class="work-intro-title">
+                    Our <span class="highlight">work</span>
+                </h2>
+            </div>
+            <div class="work-intro-desc">
+                <p>We craft premium visual experiences that elevate brands and captivate audiences. Our design philosophy combines cutting-edge aesthetics with strategic storytelling.</p>
+                <p>From thumbnail designs to complete branding solutions, we deliver excellence with every pixel, every color, and every creative vision.</p>
+            </div>
+        </div>
+
+        <!-- Work Gallery -->
+        <div class="work-gallery">
+            <div class="work-card">
+                <img src="https://i.ibb.co/Rpfj40nF/IMG-20260327-101233.jpg" alt="Portfolio work 1">
+            </div>
+            <div class="work-card">
+                <img src="https://i.ibb.co/BWxvSFk/IMG-20260310-210428.jpg" alt="Portfolio work 2">
+            </div>
+            <div class="work-card">
+                <img src="https://i.ibb.co/FGSXg7M/IMG-20260310-210446.jpg" alt="Portfolio work 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Reviews Section -->
+    <section class="reviews container">
+        <h2 class="reviews-title">Client Reviews</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-card-content">
+                    <p class="review-text">"Anshu's thumbnail design boosted my CTR instantly. Professional, creative, and exactly what I needed."</p>
+                    <p class="review-author">— Rohit Mehta</p>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-card-content">
+                    <p class="review-text">"Premium look, clean design and fast delivery. Highly recommended for anyone looking for quality design work."</p>
+                    <p class="review-author">— Neha Sharma</p>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-card-content">
+                    <p class="review-text">"Best minimal and professional thumbnail designer. Turned my vision into reality with exceptional attention to detail."</p>
+                    <p class="review-author">— Aman Verma</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer class="container">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://instagram.com/anshu_kumar064" target="_blank" class="footer-link">Instagram</a>
+                <span style="color: rgba(255, 255, 255, 0.3);">•</span>
+                <a href="mailto:nextgenanshu.1@gmail.com" class="footer-link">Email</a>
+                <span style="color: rgba(255, 255, 255, 0.3);">•</span>
+                <a href="https://drive.google.com/drive/folders/1hW17mL4oXOym7YejJYLyS1K9JQ0WRADY" target="_blank" class="footer-link">Portfolio Drive</a>
+            </div>
+            <p class="footer-text">© 2026 ANSHU KUMAR DESIGN STUDIO. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior for CTA button
+        document.querySelector('.hero-cta').addEventListener('click', function() {
+            document.querySelector('.work-intro').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-on-scroll');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all work cards and review cards
+        document.querySelectorAll('.work-card, .review-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Add subtle mouse follow effect to hero
+        const hero = document.querySelector('.hero');
+        document.addEventListener('mousemove', (e) => {
+            const shape = document.querySelector('.hero-shape');
+            const x = (window.innerWidth - e.clientX * 2) / 100;
+            const y = (window.innerHeight - e.clientY * 2) / 100;
+            shape.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // Add scroll reveal for work intro
+        const workIntro = document.querySelector('.work-intro');
+        observer.observe(workIntro);
+    </script>
+</body>
+</html>
